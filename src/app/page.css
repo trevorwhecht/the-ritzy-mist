@@ -1,0 +1,129 @@
+@tailwind components;
+
+@layer components {
+  .hero-section {
+    @apply relative;
+    @apply w-full;
+    @apply min-h-screen;
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+    margin-top: -64px; /* Offset for the header height */
+  }
+
+  .video-background {
+    @apply fixed;
+    @apply top-0;
+    @apply left-0;
+    @apply w-full;
+    @apply h-full;
+    @apply object-cover;
+    @apply z-0;
+  }
+
+  .hero-content {
+    @apply relative;
+    @apply z-10;
+    @apply flex;
+    @apply flex-col;
+    @apply items-center;
+    transform: translateY(-32px); /* Slight upward adjustment to account for visual weight */
+  }
+
+  .hero-content h2 {
+    margin-top: -0.7em;
+  }
+
+  .main-content {
+    @apply relative;
+    @apply z-10;
+    background-image: url("https://static.wixstatic.com/media/d5800b_360e5c85e3fa48e4ba672e3ca2928f16~mv2.png");
+    @apply bg-cover;
+    @apply bg-center;
+    @apply bg-fixed;
+    @apply text-white;
+  }
+
+  .about-image {
+    @apply w-full h-full bg-cover min-h-[320px];
+    background-image: url("https://static.wixstatic.com/media/d5800b_c33eb05f1ec44c2d93b7d078f3ab7c3a~mv2.jpg");
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 1s ease-out, glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .btn-main {
+    @apply inline-block text-white border-2 border-white bg-transparent hover:bg-white hover:text-black transition-colors duration-300;
+  }
+
+  .btn-main:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 4px #fff, 0 0 8px #fff;
+  }
+  to {
+    text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 24px #fff;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Prevent overscroll */
+html,
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Ensure proper stacking context */
+body {
+  @apply relative;
+  @apply min-h-screen;
+  @apply overflow-x-hidden;
+}
+
