@@ -245,21 +245,6 @@ export default function ContactPage() {
                 )}
 
                 <div className="relative">
-                  <label className="text-white text-lg font-['AlegreyaSansSC'] mb-2 block inline-flex items-center">
-                    Skin Type
-                    <SkinTypeModal />
-                  </label>
-                  <input
-                    type="text"
-                    name="skinType"
-                    value={formData.skinType}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-black/50 backdrop-blur-sm border border-white/20 text-white focus:outline-none focus:border-[#d59586]"
-                    required
-                  />
-                </div>
-
-                <div className="relative">
                   <label className="text-white text-lg font-['AlegreyaSansSC'] mb-2 block">
                     Inquiry
                   </label>

@@ -1,6 +1,7 @@
 'use client';
 
 import { SectionHeader } from '@/components/SectionHeader';
+import SkinTypeModal from '@/components/SkinTypeModal';
 
 export default function SprayTansBooking() {
   const googleWidget = `

@@ -52,18 +52,20 @@ export default function Nav() {
         />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden" justify="center">
-        <NavbarBrand>
-          <Link as={NextLink} href="/" className="font-['Pinyon Script'] text-2xl text-white">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Ritzy%20Mist%20Branding%20(1)-qMybz9vMh07GWSE8i1V1TujnIkb9eB.png"
-              alt="Ritzy Mist"
-              width={200}
-              height={50}
-              className="mb-1"
-            />
-          </Link>
-        </NavbarBrand>
+      <NavbarContent className="sm:hidden flex-grow justify-center">
+        <div className="w-full flex justify-center">
+          <NavbarBrand>
+            <Link as={NextLink} href="/" className="font-['Pinyon Script'] text-2xl text-white">
+              <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Ritzy%20Mist%20Branding%20(1)-qMybz9vMh07GWSE8i1V1TujnIkb9eB.png"
+                alt="Ritzy Mist"
+                width={200}
+                height={50}
+                className="mb-1"
+              />
+            </Link>
+          </NavbarBrand>
+        </div>
       </NavbarContent>
 
       <NavbarMenu className="bg-black/90 pt-6">
@@ -78,6 +80,26 @@ export default function Nav() {
             </Link>
           </NavbarMenuItem>
         ))}
+        
+        <NavbarMenuItem>
+          <Link
+            color="foreground"
+            className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
+            onClick={() => handleNavigation('/care')}
+          >
+            Spray Tan Care
+          </Link>
+        </NavbarMenuItem>
+        
+        <NavbarMenuItem>
+          <Link
+            color="foreground"
+            className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
+            onClick={() => handleNavigation('/policies')}
+          >
+            Policies
+          </Link>
+        </NavbarMenuItem>
         
         <div className="w-full flex justify-center mt-auto pb-8">
           <Link href="https://instagram.com/theritzymist" target="_blank" rel="noopener noreferrer">
