@@ -29,7 +29,7 @@ export default async function Home() {
           </h2>
           <a 
             className="btn-main px-6 py-3 text-lg font-semibold"
-            href="/contact"
+            href="/services/spraytans"
           >
             Book Now
           </a>
