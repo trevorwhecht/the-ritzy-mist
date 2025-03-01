@@ -101,7 +101,7 @@ export default function Nav() {
           </Link>
         </NavbarMenuItem>
         
-        <div className="w-full flex justify-center mt-auto pb-8">
+        <div className="w-full flex justify-center mt-auto pb-12">
           <Link href="https://instagram.com/theritzymist" target="_blank" rel="noopener noreferrer">
             <Instagram className="w-6 h-6 text-white hover:text-gray-300" />
           </Link>

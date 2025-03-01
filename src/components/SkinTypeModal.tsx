@@ -13,7 +13,7 @@ export default function SkinTypeModal() {
       </p>
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center justify-center px-6 py-2 text-white bg-[#d59586] rounded-md hover:bg-[#c48475] transition-colors font-['AlegreyaSansSC'] text-lg"
+        className="inline-flex items-center justify-center px-6 py-2 text-white bg-transparent border border-white rounded-md hover:border-white/80 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300 font-['AlegreyaSansSC'] text-lg"
         aria-label="View skin type guide"
       >
         View Skin Type Guide
@@ -42,7 +42,7 @@ export default function SkinTypeModal() {
                 <div className="flex justify-end mb-4">
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="bg-[#d59586] hover:bg-[#c48475] text-white font-['AlegreyaSansSC'] px-4 py-2 rounded-md transition-colors"
+                    className="bg-transparent border border-white text-white px-4 py-2 rounded-md hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300 font-['AlegreyaSansSC']"
                   >
                     Close
                   </button>
