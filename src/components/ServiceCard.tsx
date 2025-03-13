@@ -27,7 +27,7 @@ interface ServiceCardProps {
   showSkinTypes?: boolean;
 }
 
-export default function ServiceCard({ showPriceList = true, showSkinTypes = true }: ServiceCardProps) {
+export default function ServiceCard({ showPriceList = false, showSkinTypes = true }: ServiceCardProps) {
   return (
     <div className="flex flex-col lg:flex-row justify-evenly items-start gap-8">
       {/* Services Section */}
