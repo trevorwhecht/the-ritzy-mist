@@ -9,14 +9,14 @@ const services = [
   {
     title: "Spray Tans",
     description: "Get that perfect, natural-looking glow with our professional spray tanning service. Each session is customized to your skin tone and preferences.",
-    price: "Starting at $55",
+    price: "Starting at $75",
     imageUrl: "https://static.wixstatic.com/media/d5800b_721ae815a6d34adf8b1f6c61d9ff8b01~mv2.jpg",
     href: "/services/spraytans"
   },
   {
     title: "Group Spray Tans",
     description: "Perfect for bridal parties, special events, or just a fun day with friends! Enjoy group discounts and a great bonding experience.",
-    price: "Starting at $200 (minimum 4 people)",
+    price: "Starting at $300 (minimum 5 people)",
     imageUrl: "https://static.wixstatic.com/media/d5800b_aceccedf547042f786db66be28354135~mv2.jpg",
     href: "/contact?type=group"
   }
