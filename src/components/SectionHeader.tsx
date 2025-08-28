@@ -5,7 +5,7 @@ import type React from "react"
 interface SectionHeaderProps {
   children: React.ReactNode
   className?: string
-  size?: "large" | "small"
+  size?: "large" | "medium" | "small"
 }
 
 export function SectionHeader({ children, className, size = "large" }: SectionHeaderProps) {
@@ -14,7 +14,7 @@ export function SectionHeader({ children, className, size = "large" }: SectionHe
       <h2
         className={cn(
           "font-['AlegreyaSansSC'] text-white tracking-tighter",
-          size === "large" ? "text-6xl" : "text-3xl",
+          size === "large" ? "text-6xl" : size === "medium" ? "text-4xl" : "text-3xl",
           className,
         )}
       >
@@ -24,7 +24,7 @@ export function SectionHeader({ children, className, size = "large" }: SectionHe
         className={cn(
           "absolute left-0 right-[-20%]",
           "bg-[#d59586]",
-          size === "large" ? "h-2" : "h-1 -bottom-1",
+          size === "large" ? "h-2" : size === "medium" ? "h-1.5 -bottom-1" : "h-1 -bottom-1",
         )}
       />
     </div>
