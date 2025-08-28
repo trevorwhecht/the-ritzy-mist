@@ -191,14 +191,6 @@ export default function PriceList() {
             </div>
           </motion.div>
 
-          {/* Contact Information */}
-          <motion.div custom={4} variants={textVariants} className="text-center">
-            <div className="space-y-3">
-              <p className="text-lg font-bold">Instagram: @theritzymist</p>
-              <p className="text-lg font-bold">I COME TO YOU!</p>
-              <p className="text-lg font-bold">(916) 628-4899</p>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </div>

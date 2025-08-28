@@ -1,4 +1,3 @@
-import SkinTypeModal from '@/components/SkinTypeModal'
 import Link from 'next/link'
 
 const FooterNote = () => (
@@ -10,10 +9,6 @@ const FooterNote = () => (
 const Footer = () => (
   <footer className="relative z-10 w-full min-h-[14rem] bg-black leading-7 text-white border-t-2 border-white">
     <div className="max-w-full-content mx-auto pt-10 pb-8">
-      <div className="mb-10">
-        <SkinTypeModal />
-      </div>
-      
       <div className="flex flex-col items-center mb-8">
         <p className="font-['AlegreyaSansSC'] text-2xl mb-4">Contact Info</p>
         <div className="flex flex-col md:flex-row gap-6 mb-6 text-center">

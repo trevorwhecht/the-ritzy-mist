@@ -2,23 +2,28 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import PriceList from './PriceList'
-import SkinTypes from './SkinTypes'
 
 const services = [
   {
-    title: "Spray Tans",
-    description: "Get that perfect, natural-looking glow with our professional spray tanning service. Each session is customized to your skin tone and preferences.",
+    title: "Spray Tan",
+    description: "Come to my cozy spray tan studio! All of my luxury items and add ons will be on display for purchase at the time of your appointment. I'll have everything else you'll need!",
     price: "Starting at $75",
     imageUrl: "https://static.wixstatic.com/media/d5800b_721ae815a6d34adf8b1f6c61d9ff8b01~mv2.jpg",
     href: "/services/spraytans"
   },
   {
-    title: "Group Spray Tans",
+    title: "Mobile Spray Tan",
+    description: "I bring my tent and spray you in the comfort of your own home!",
+    price: "Starting at $75",
+    imageUrl: "/IMG_0930.jpeg",
+    href: "/services/mobilespraytan"
+  },
+  {
+    title: "Group Spray Tan",
     description: "Perfect for bridal parties, special events, or just a fun day with friends! Enjoy group discounts and a great bonding experience.",
     price: "Starting at $300 (minimum 5 people)",
     imageUrl: "https://static.wixstatic.com/media/d5800b_aceccedf547042f786db66be28354135~mv2.jpg",
-    href: "/contact?type=group"
+    href: "/services/group-spray-tan"
   }
 ]
 
@@ -27,11 +32,11 @@ interface ServiceCardProps {
   showSkinTypes?: boolean;
 }
 
-export default function ServiceCard({ showPriceList = false, showSkinTypes = true }: ServiceCardProps) {
+export default function ServiceCard({ showPriceList = false, showSkinTypes = false }: ServiceCardProps) {
   return (
-    <div className="flex flex-col lg:flex-row justify-evenly items-start gap-8">
-      {/* Services Section */}
-      <div className="w-full lg:w-[30%] flex flex-col md:flex-row justify-center gap-6">
+    <div className="flex flex-col justify-center items-center mb-16">
+      {/* Services Section - Span 3/4 of page */}
+      <div className="w-3/4 flex flex-col md:flex-row justify-center gap-6">
         {services.map((service, index) => (
           <motion.div 
             key={index}
@@ -68,20 +73,6 @@ export default function ServiceCard({ showPriceList = false, showSkinTypes = tru
           </motion.div>
         ))}
       </div>
-
-      {/* Skin Types Section */}
-      {showSkinTypes && (
-        <div className="w-full lg:w-[30%]">
-          <SkinTypes />
-        </div>
-      )}
-
-      {/* Price List Section */}
-      {showPriceList && (
-        <div className="w-full lg:w-[30%]">
-          <PriceList />
-        </div>
-      )}
     </div>
   )
 } 

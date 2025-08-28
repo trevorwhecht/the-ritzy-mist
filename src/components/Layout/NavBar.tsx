@@ -46,16 +46,8 @@ export default function Nav() {
     >
       {/* Mobile view with 3-column layout for perfect centering */}
       <div className="w-full flex items-center sm:hidden">
-        {/* Left column - menu toggle */}
-        <div className="w-[60px] flex justify-start">
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="text-white"
-          />
-        </div>
-        
-        {/* Center column - logo */}
-        <div className="flex-1 flex justify-center">
+        {/* Left column - logo */}
+        <div className="w-[200px] flex justify-start -ml-4">
           <NavbarBrand>
             <NextUILink as={NextLink} href="/" className="font-['Pinyon Script'] text-2xl text-white">
               <Image
@@ -69,8 +61,16 @@ export default function Nav() {
           </NavbarBrand>
         </div>
         
-        {/* Right column - empty space to balance the menu toggle */}
-        <div className="w-[60px]"></div>
+        {/* Center column - empty space to balance the layout */}
+        <div className="flex-1"></div>
+        
+        {/* Right column - menu toggle */}
+        <div className="w-[60px] flex justify-end">
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="text-white"
+          />
+        </div>
       </div>
 
       <NavbarMenu className="bg-black/90 pt-6">

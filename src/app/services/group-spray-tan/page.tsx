@@ -5,7 +5,7 @@ import SkinTypes from '@/components/SkinTypes';
 import GoogleBookingWidget from '@/components/GoogleBookingWidget';
 import { useState, useCallback } from 'react';
 
-export default function SprayTansBooking() {
+export default function GroupSprayTanBooking() {
   const [showSkinTypes, setShowSkinTypes] = useState(true);
   
   // Memoize the click handler to prevent unnecessary re-renders
@@ -18,7 +18,7 @@ export default function SprayTansBooking() {
       <div className="container mx-auto px-4 py-8">
         <div className="header-line my-8"></div>
         <div className="flex justify-center">
-          <SectionHeader>Book Now</SectionHeader>
+          <SectionHeader size="medium">Group Spary Tan</SectionHeader>
         </div>
         
         {/* Mobile Layout - Skin Types First, then Booking Widget */}
@@ -45,14 +45,14 @@ export default function SprayTansBooking() {
           </div>
           
           {/* Booking Widget - This should not re-render */}
-          <GoogleBookingWidget src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1EEUVkQgRuvSijzsK_YLbl2N6V_j0ELIEVZtLgyCLU1AEhX6zVnE1p-P92yzXc_RLC5nIxwldE?gv=true&showTitle=0&showCalendarLink=0&showNav=0&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&bgcolor=%23ffffff&color=%23000000&hl=en" />
+          <GoogleBookingWidget src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0r5d9m-AZfX9yevgQ9UmNnnuXcktAarQ3UkRJscREvG0EdJb5pIknxAnILvyEz2GR42A6ZPcmx?gv=true" />
         </div>
         
         {/* Desktop Layout - 2/3 Google Widget, 1/3 Skin Types */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-8 w-full">
           {/* Left Column - Google Widget (2/3) */}
           <div className="lg:col-span-2">
-            <GoogleBookingWidget src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1EEUVkQgRuvSijzsK_YLbl2N6V_j0ELIEVZtLgyCLU1AEhX6zVnE1p-P92yzXc_RLC5nIxwldE?gv=true&showTitle=0&showCalendarLink=0&showNav=0&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&bgcolor=%23ffffff&color=%23000000&hl=en" />
+            <GoogleBookingWidget src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0r5d9m-AZfX9yevgQ9UmNnnuXcktAarQ3UkRJscREvG0EdJb5pIknxAnILvyEz2GR42A6ZPcmx?gv=true" />
           </div>
           
           {/* Right Column - Skin Types (1/3) */}
@@ -63,4 +63,4 @@ export default function SprayTansBooking() {
       </div>
     </div>
   );
-} 
+}
