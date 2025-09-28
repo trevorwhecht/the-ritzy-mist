@@ -69,6 +69,7 @@ export default function Nav() {
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             className="text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           />
         </div>
       </div>
