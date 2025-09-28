@@ -51,7 +51,7 @@ export default function RootLayout({
         <div className="fixed top-0 left-0 right-0 z-50 bg-opacity-90 bg-black">
           <NavBar />
         </div>
-        <main className="pt-[65px]">{children}</main>
+        <main className="pt-16 sm:pt-[65px]">{children}</main>
         <Footer />
       </body>
      
