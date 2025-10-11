@@ -7,7 +7,7 @@ const services = [
   {
     title: "Spray Tan",
     description: "Come to my cozy spray tan studio! All of my luxury items and add ons will be on display for purchase at the time of your appointment. I'll have everything else you'll need!",
-    price: "Starting at $75",
+    price: "Starting at $55",
     imageUrl: "https://static.wixstatic.com/media/d5800b_721ae815a6d34adf8b1f6c61d9ff8b01~mv2.jpg",
     href: "/services/spraytans"
   },
