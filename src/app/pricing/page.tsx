@@ -1,6 +1,6 @@
 'use client'
 import { SectionHeader } from '@/components/SectionHeader'
-import PriceList from '@/components/PriceList'
+import PricingTabsComponent from '@/components/PricingTabs'
 
 export default function PricingPage() {
   return (
@@ -11,7 +11,7 @@ export default function PricingPage() {
         </div>
         <div className="w-full h-full pb-12">
           <div className="relative max-w-full-content mx-auto">
-            <PriceList />
+            <PricingTabsComponent />
           </div>
         </div>
       </div>
