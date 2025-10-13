@@ -69,11 +69,6 @@ export default function Nav() {
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             className="text-white p-2 min-w-[44px] min-h-[44px]"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsMenuOpen(!isMenuOpen);
-            }}
           />
         </div>
       </div>
@@ -84,7 +79,7 @@ export default function Nav() {
             <NextUILink
               color="foreground"
               className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
-              onClick={() => handleNavigation(item.href)}
+              onPress={() => handleNavigation(item.href)}
             >
               {item.name}
             </NextUILink>
@@ -95,7 +90,7 @@ export default function Nav() {
           <NextUILink
             color="foreground"
             className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
-            onClick={() => handleNavigation('/care')}
+            onPress={() => handleNavigation('/care')}
           >
             Spray Tan Care
           </NextUILink>
@@ -105,7 +100,7 @@ export default function Nav() {
           <NextUILink
             color="foreground"
             className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
-            onClick={() => handleNavigation('/policies')}
+            onPress={() => handleNavigation('/policies')}
           >
             Policies
           </NextUILink>
