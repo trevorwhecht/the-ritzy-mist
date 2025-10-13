@@ -1,7 +1,7 @@
 'use client';
 
 import { SectionHeader } from '@/components/SectionHeader';
-import SkinTypes from '@/components/SkinTypes';
+import SkinTypesOnly from '@/components/SkinTypesOnly';
 import GoogleBookingWidget from '@/components/GoogleBookingWidget';
 import { useState, useCallback } from 'react';
 
@@ -40,7 +40,7 @@ export default function GroupSprayTanBooking() {
                 opacity: showSkinTypes ? 1 : 0
               }}
             >
-              <SkinTypes />
+              <SkinTypesOnly />
             </div>
           </div>
           
@@ -57,7 +57,7 @@ export default function GroupSprayTanBooking() {
           
           {/* Right Column - Skin Types (1/3) */}
           <div className="lg:col-span-1">
-            <SkinTypes />
+            <SkinTypesOnly />
           </div>
         </div>
       </div>

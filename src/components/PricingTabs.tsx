@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 // Types
 interface Tab {
@@ -21,6 +22,18 @@ const PricingTabsComponent: React.FC<PricingTabsComponentProps> = ({
   className = ''
 }) => {
   const [activeTab, setActiveTab] = useState(initialActiveTab)
+
+  // Helper function to convert service title to URL slug
+  const createServiceSlug = (title: string): string => {
+    // Extract service name before the price (before "—" or "-")
+    const serviceName = title.split('—')[0].trim()
+    // Remove emojis and special characters, convert to lowercase and replace spaces with hyphens
+    return serviceName
+      .replace(/[^\w\s-]/g, '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+  }
 
   const tabs: Tab[] = [
     { id: 'inStudio', label: 'IN STUDIO SPRAY' },
@@ -81,42 +94,59 @@ const PricingTabsComponent: React.FC<PricingTabsComponentProps> = ({
               {/* Main Services */}
               <div className="space-y-6">
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">✨ OG New Client — $55</h3>
+                  <Link href={`/services/spraytans/${createServiceSlug('✨ OG New Client — $55')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">✨ OG New Client — $55</h3>
+                  </Link>
                   <p className="text-gray-300">Perfect for first-time guests! Enjoy our signature formula designed to complement your natural undertones and give a radiant, sun-kissed glow with full hydration and smooth fade. This tan will have a rinse time between 8-12 hours.</p>
                 </div>
 
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">OG Mist — $65</h3>
+                  <Link href={`/services/spraytans/${createServiceSlug('OG Mist — $65')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">OG Mist — $65</h3>
+                  </Link>
                   <p className="text-gray-300">Our classic 8-hour developing tan that delivers a rich, natural bronze with lasting results. Ideal for those who don't mind leaving the solution on overnight for optimal depth and tone.</p>
                 </div>
 
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">OG + Finishing Powder — $70</h3>
+                  <Link href={`/services/spraytans/${createServiceSlug('OG + Finishing Powder — $70')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">OG + Finishing Powder — $70</h3>
+                  </Link>
                   <p className="text-gray-300">Everything you love about the OG Mist, finished with a silky-soft body powder that instantly sets your tan, reduces stickiness, and leaves you feeling fresh and comfortable post-spray.</p>
                 </div>
 
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">Rapid Mist — $75</h3>
+                  <Link href={`/services/spraytans/${createServiceSlug('Rapid Mist — $75')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">Rapid Mist — $75</h3>
+                  </Link>
                   <p className="text-gray-300">A customizable tan that develops in just 2–6 hours. Rinse sooner for a subtle glow or wait longer for a deeper bronze — perfect for same-day events or a quicker routine.</p>
                 </div>
 
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">✨ Rapid + Finishing Powder — $80</h3>
+                  <Link href={`/services/spraytans/${createServiceSlug('✨ Rapid + Finishing Powder — $80')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">✨ Rapid + Finishing Powder — $80</h3>
+                  </Link>
                   <p className="text-gray-300">Enjoy the convenience of our Rapid formula with the comfort of a soft-touch finishing powder. You'll leave feeling confident, dry, and glowing — even before your rinse.</p>
                 </div>
 
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">Bridal Trial Glow — $70</h3>
-                  <p className="text-gray-300">Includes: Rapid Clear formula, finishing powder, and one complimentary add-on of your choice. A perfect preview of your wedding-day glow — natural, radiant, and fully customizable.</p>
+                  <Link href={`/services/spraytans/${createServiceSlug('Bridal Trial Glow — $75')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">Bridal Trial Glow — $75</h3>
+                  </Link>
+                  <p className="text-gray-300">Includes: Rapid Clear formula, finishing powder, and one complimentary add-on of your choice.
+                  A perfect preview of your wedding-day glow — natural, radiant, and fully customizable. Rinse same day!</p>
                 </div>
 
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">Bridal Glow — $85</h3>
-                  <p className="text-gray-300">Our most luxurious tan, crafted for brides and special occasions. This formula gives a flawless, camera-ready glow that's soft, smooth, and radiant in every light — no orange tones, no transfer, just pure confidence. Includes our finishing powder for instant comfort and set. Rinse same day!</p>
+                  <Link href={`/services/spraytans/${createServiceSlug('Bridal Glow — $85')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">Bridal Glow — $85</h3>
+                  </Link>
+                  <p className="text-gray-300">Our most luxurious tan, crafted for brides and special occasions. This formula gives a flawless, camera-ready glow that's soft, smooth, and radiant in every light — no orange tones, no transfer, just pure confidence. Includes our finishing powder, one complimentary add-on & Ritzy Mist undies included for instant comfort. Rinse same day!</p>
                 </div>
 
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">✨🎉 Birthday Bronze — $50</h3>
+                  <Link href={`/services/spraytans/${createServiceSlug('✨🎉 Birthday Bronze — $50')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">✨🎉 Birthday Bronze — $50</h3>
+                  </Link>
                   <p className="text-gray-300">It's your day to glow! Celebrate yourself with our exclusive birthday spray tan with our OG solution - a rich, radiant bronze that enhances your natural tone while keeping your skin hydrated and luminous. Includes our finishing powder for that instantly dry, silky feel.</p>
                 </div>
               </div>
@@ -169,17 +199,23 @@ const PricingTabsComponent: React.FC<PricingTabsComponentProps> = ({
             <div className="space-y-8">
               <div className="space-y-6">
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">OG Mist — $75</h3>
+                  <Link href={`/services/mobilespraytan/${createServiceSlug('OG Mist — $75')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">OG Mist — $75</h3>
+                  </Link>
                   <p className="text-gray-300">Bringing everything to you! Our signature 8-hour developing formula gives a natural, hydrated bronze right from the comfort of your own space. We always finish the session off with a setting powder to make sure you're as comfortable as possible.</p>
                 </div>
 
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">✨ Rapid Mist — $90</h3>
+                  <Link href={`/services/mobilespraytan/${createServiceSlug('✨ Rapid Mist — $90')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">✨ Rapid Mist — $90</h3>
+                  </Link>
                   <p className="text-gray-300">On-the-go glam. Achieve a golden, customizable tan in as little as 2-6 hours. This is perfect for last-minute plans or busy schedules. Every mobile service has all of the essentials to make the session go seamless. Setting powder is always included in this service.</p>
                 </div>
 
                 <div className="border-b border-gray-600 pb-4">
-                  <h3 className="text-2xl font-bold text-[#d59586] mb-2">Mobile Bridal Glow — $100</h3>
+                  <Link href={`/services/mobilespraytan/${createServiceSlug('Mobile Bridal Glow — $100')}`} className="hover:opacity-80 transition-opacity">
+                    <h3 className="text-2xl font-bold text-[#d59586] mb-2 cursor-pointer">Mobile Bridal Glow — $100</h3>
+                  </Link>
                   <p className="text-gray-300">Perfect for your big day or any day you want to feel your most radiant. Enjoy our premium solution, rinsing within 2-6 hrs, and powder finish from the comfort of your home, hotel, or venue. We ensure a seamless, streak-free glow designed to photograph beautifully and last through every celebration.</p>
                 </div>
               </div>
