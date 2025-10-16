@@ -4,6 +4,7 @@ import { SectionHeader } from '@/components/SectionHeader';
 import SkinTypesOnly from '@/components/SkinTypesOnly';
 import GoogleBookingWidget from '@/components/GoogleBookingWidget';
 import { useState, useCallback } from 'react';
+import Script from 'next/script';
 
 export default function SprayTansBooking() {
   const [showSkinTypes, setShowSkinTypes] = useState(true);
@@ -14,7 +15,20 @@ export default function SprayTansBooking() {
   }, []);
 
   return (
-    <div className="relative z-10 min-h-screen">
+    <>
+      {/* Facebook Pixel ViewContent Event */}
+      <Script id="facebook-viewcontent" strategy="afterInteractive">
+        {`
+          fbq('track', 'ViewContent', {
+            value: 'View Booking page',
+            currency: 'US',
+            content_ids: '1',
+            content_type: 'View',
+          });
+        `}
+      </Script>
+      
+      <div className="relative z-10 min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <div className="header-line my-8"></div>
         <div className="flex justify-center">
@@ -62,5 +76,6 @@ export default function SprayTansBooking() {
         </div>
       </div>
     </div>
+    </>
   );
 } 

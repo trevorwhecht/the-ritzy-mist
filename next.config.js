@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['static.wixstatic.com', 'firebasestorage.googleapis.com', 'hebbkx1anhila5yf.public.blob.vercel-storage.com'],
+    domains: ['static.wixstatic.com', 'firebasestorage.googleapis.com', 'hebbkx1anhila5yf.public.blob.vercel-storage.com', '7njnoxrfmp9jlkvi.public.blob.vercel-storage.com'],
   },
   async headers() {
     return [
