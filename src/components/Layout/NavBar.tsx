@@ -90,7 +90,7 @@ export default function Nav() {
           <NextUILink
             color="foreground"
             className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
-            onPress={() => handleNavigation('/care')}
+            onPress={() => handleNavigation('/spraytancare')}
           >
             Spray Tan Care
           </NextUILink>
@@ -142,7 +142,7 @@ export default function Nav() {
           </NavbarItem>
         ))}
         <NavbarItem>
-          <NextUILink href="/care" className="text-white text-lg font-[AlegreyaSansSC] hover:text-[#d59586]">
+          <NextUILink href="/spraytancare" className="text-white text-lg font-[AlegreyaSansSC] hover:text-[#d59586]">
             Spray Tan Care
           </NextUILink>
         </NavbarItem>

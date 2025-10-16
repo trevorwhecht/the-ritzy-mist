@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Head from 'next/head'
 
 export default function Care() {
   const prepItems = [
@@ -22,7 +23,17 @@ export default function Care() {
   ];
 
   return (
-    <div className="min-h-screen pt-0 px-4 bg-black">
+    <>
+      <Head>
+        <title>Spray Tan Care - The Ritzy Mist</title>
+        <meta name="description" content="Essential spray tan preparation and aftercare tips for long-lasting, beautiful results." />
+        <meta property="og:title" content="Spray Tan Care - The Ritzy Mist" />
+        <meta property="og:description" content="Essential spray tan preparation and aftercare tips for long-lasting, beautiful results." />
+        <meta property="og:url" content="https://theritzymist.com/spraytancare" />
+        <meta name="twitter:title" content="Spray Tan Care - The Ritzy Mist" />
+        <meta name="twitter:description" content="Essential spray tan preparation and aftercare tips for long-lasting, beautiful results." />
+      </Head>
+      <div className="min-h-screen pt-0 px-4 bg-black">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
@@ -89,5 +100,6 @@ export default function Care() {
         </motion.div>
       </div>
     </div>
+    </>
   )
 } 

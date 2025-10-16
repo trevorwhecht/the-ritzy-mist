@@ -31,6 +31,25 @@ export default function RootLayout({
         name="viewport" 
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" 
       />
+      
+      {/* Open Graph Meta Tags */}
+      <meta property="og:title" content="The Ritzy Mist - Mobile Spray Tanning" />
+      <meta property="og:description" content="Professional mobile spray tanning services. Book your appointment today!" />
+      <meta property="og:image" content="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/RitzyMist-Landscape.jpg" />
+      <meta property="og:url" content="https://theritzymist.com" />
+      <meta property="og:type" content="website" />
+      
+      {/* Twitter Card Meta Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="The Ritzy Mist - Mobile Spray Tanning" />
+      <meta name="twitter:description" content="Professional mobile spray tanning services. Book your appointment today!" />
+      <meta name="twitter:image" content="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/RitzyMist-Landscape.jpg" />
+      
+      {/* Favicon */}
+      <link rel="icon" type="image/png" href="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/favIcon.png" />
+      <link rel="shortcut icon" type="image/png" href="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/favIcon.png" />
+      <link rel="apple-touch-icon" href="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/favIcon.png" />
+      
       <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
       {/* Meta Pixel Code */}
       <Script id="facebook-pixel" strategy="afterInteractive">
