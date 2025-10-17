@@ -33,7 +33,7 @@ export default function Care() {
         <meta name="twitter:title" content="Spray Tan Care - The Ritzy Mist" />
         <meta name="twitter:description" content="Essential spray tan preparation and aftercare tips for long-lasting, beautiful results." />
       </Head>
-       <div className="min-h-screen pt-0 px-4 pb-32 bg-black">
+       <div className="min-h-screen pt-0 px-4 pb-96 bg-black">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
