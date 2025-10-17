@@ -33,16 +33,16 @@ export default function Care() {
         <meta name="twitter:title" content="Spray Tan Care - The Ritzy Mist" />
         <meta name="twitter:description" content="Essential spray tan preparation and aftercare tips for long-lasting, beautiful results." />
       </Head>
-      <div className="min-h-screen pt-0 px-4 bg-black">
+       <div className="min-h-screen pt-0 px-4 pb-32 bg-black">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex md:flex-row flex-col gap-16 items-start justify-center">
-            {/* Spray Tan Prep Section */}
-            <div className="relative w-full max-w-md">
+           <div className="flex md:flex-row flex-col gap-24 md:gap-24 items-start justify-center">
+             {/* Spray Tan Prep Section */}
+             <div className="relative w-full max-w-md mb-24 md:mb-0">
               <Image
                 src="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/SprayTanCare/sprayTan-Prep.svg"
                 alt="Spray Tan Preparation"
