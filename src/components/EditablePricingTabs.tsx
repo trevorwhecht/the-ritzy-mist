@@ -22,7 +22,16 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   const [editingGroupItem, setEditingGroupItem] = useState<number | null>(null)
   const [editingGroupSection, setEditingGroupSection] = useState<number | null>(null)
   const [editingAddOn, setEditingAddOn] = useState<{ tab: 'inStudio' | 'mobile', index: number } | null>(null)
-  const [deleteConfirm, setDeleteConfirm] = useState<{ type: 'service' | 'groupItem' | 'addOn', data: any } | null>(null)
+  const [deleteConfirm, setDeleteConfirm] = useState<{ 
+    type: 'service', 
+    data: { tab: 'inStudio' | 'mobile', id: string }
+  } | {
+    type: 'groupItem',
+    data: { index: number }
+  } | {
+    type: 'addOn',
+    data: { tab: 'inStudio' | 'mobile', index: number }
+  } | null>(null)
 
   // Load pricing data on mount - always prioritize saved data
   useEffect(() => {
@@ -76,11 +85,12 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
 
     if (deleteConfirm.type === 'service') {
       const { tab, id } = deleteConfirm.data
+      const tabData = pricingData[tab]
       setPricingData({
         ...pricingData,
         [tab]: {
-          ...pricingData[tab],
-          services: pricingData[tab].services.filter(s => s.id !== id)
+          ...tabData,
+          services: tabData.services.filter(s => s.id !== id)
         }
       })
     } else if (deleteConfirm.type === 'groupItem') {
@@ -94,14 +104,15 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
       })
     } else if (deleteConfirm.type === 'addOn') {
       const { tab, index } = deleteConfirm.data
-      if (pricingData[tab].addOns) {
-        const newItems = pricingData[tab].addOns!.items.filter((_, i) => i !== index)
+      const tabData = pricingData[tab]
+      if (tabData.addOns) {
+        const newItems = tabData.addOns.items.filter((_, i) => i !== index)
         setPricingData({
           ...pricingData,
           [tab]: {
-            ...pricingData[tab],
+            ...tabData,
             addOns: {
-              ...pricingData[tab].addOns!,
+              ...tabData.addOns,
               items: newItems
             }
           }
@@ -376,7 +387,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   }
 
   const renderEditableAddOns = (tab: 'inStudio' | 'mobile') => {
-    if (!pricingData[tab].addOns) return null
+    if (!pricingData || !pricingData[tab].addOns) return null
 
     const addOns = pricingData[tab].addOns
 
