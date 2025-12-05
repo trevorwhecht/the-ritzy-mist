@@ -45,6 +45,8 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
 
   // Service editing functions
   const handleAddService = (tab: 'inStudio' | 'mobile') => {
+    if (!pricingData) return
+    
     const newService: PricingItem = {
       id: `new-${Date.now()}`,
       title: 'New Service',
@@ -70,7 +72,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   }
 
   const confirmDelete = () => {
-    if (!deleteConfirm) return
+    if (!deleteConfirm || !pricingData) return
 
     if (deleteConfirm.type === 'service') {
       const { tab, id } = deleteConfirm.data
@@ -112,6 +114,8 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   }
 
   const handleUpdateService = (tab: 'inStudio' | 'mobile', id: string, field: keyof PricingItem, value: string) => {
+    if (!pricingData) return
+    
     setPricingData({
       ...pricingData,
       [tab]: {
@@ -125,6 +129,8 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
 
   // Add-ons editing functions
   const handleAddAddOn = (tab: 'inStudio' | 'mobile') => {
+    if (!pricingData) return
+    
     if (!pricingData[tab].addOns) {
       setPricingData({
         ...pricingData,
@@ -159,7 +165,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   }
 
   const handleUpdateAddOn = (tab: 'inStudio' | 'mobile', index: number, field: 'title' | 'description' | 'price', value: string) => {
-    if (!pricingData[tab].addOns) return
+    if (!pricingData || !pricingData[tab].addOns) return
     
     setPricingData({
       ...pricingData,
@@ -176,7 +182,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   }
 
   const handleUpdateAddOnsMeta = (tab: 'inStudio' | 'mobile', field: 'title' | 'description', value: string) => {
-    if (!pricingData[tab].addOns) return
+    if (!pricingData || !pricingData[tab].addOns) return
     
     setPricingData({
       ...pricingData,
@@ -199,6 +205,8 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
 
   // Group editing functions
   const handleAddGroupItem = () => {
+    if (!pricingData) return
+    
     setPricingData({
       ...pricingData,
       group: {
@@ -217,6 +225,8 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   }
 
   const handleUpdateGroupItem = (index: number, field: 'label' | 'value', value: string) => {
+    if (!pricingData) return
+    
     setPricingData({
       ...pricingData,
       group: {
@@ -229,6 +239,8 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   }
 
   const handleUpdateGroupSection = (index: number, field: 'title' | 'content', value: string) => {
+    if (!pricingData) return
+    
     setPricingData({
       ...pricingData,
       group: {
@@ -241,6 +253,8 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   }
 
   const handleUpdateGroupHeader = (value: string) => {
+    if (!pricingData) return
+    
     setPricingData({
       ...pricingData,
       group: {
@@ -251,7 +265,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   }
 
   const handleUpdateGroupFooter = (field: 'title' | 'content', value: string) => {
-    if (!pricingData.group.footer) return
+    if (!pricingData || !pricingData.group.footer) return
     setPricingData({
       ...pricingData,
       group: {
