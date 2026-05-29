@@ -46,7 +46,7 @@ export default function PricingPage() {
         <div className="w-full h-full pb-12">
           <div className="relative max-w-full-content mx-auto">
             {isEditable && isAuthenticated ? (
-              <EditablePricingTabs />
+              <EditablePricingTabs password={PASSWORD} />
             ) : (
               <PricingTabsComponent />
             )}

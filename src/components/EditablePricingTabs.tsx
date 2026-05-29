@@ -2,27 +2,29 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  PricingData, 
-  PricingItem, 
-  loadPricingData, 
-  savePricingData, 
-  defaultPricingData 
+import {
+  PricingData,
+  PricingItem,
+  defaultPricingData
 } from '@/lib/pricingData'
 import ConfirmDialog from './ConfirmDialog'
 
 interface EditablePricingTabsProps {
   className?: string
+  password: string
 }
 
-const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '' }) => {
+const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '', password }) => {
   const [activeTab, setActiveTab] = useState('inStudio')
   const [pricingData, setPricingData] = useState<PricingData | null>(null)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editingGroupItem, setEditingGroupItem] = useState<number | null>(null)
   const [editingGroupSection, setEditingGroupSection] = useState<number | null>(null)
   const [editingAddOn, setEditingAddOn] = useState<{ tab: 'inStudio' | 'mobile', index: number } | null>(null)
-  const [deleteConfirm, setDeleteConfirm] = useState<{ 
+  const [isSaving, setIsSaving] = useState(false)
+  const [saveMessage, setSaveMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
+
+  const [deleteConfirm, setDeleteConfirm] = useState<{
     type: 'service', 
     data: { tab: 'inStudio' | 'mobile', id: string }
   } | {
@@ -33,18 +35,12 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
     data: { tab: 'inStudio' | 'mobile', index: number }
   } | null>(null)
 
-  // Load pricing data on mount - always prioritize saved data
   useEffect(() => {
-    const loaded = loadPricingData()
-    setPricingData(loaded)
+    fetch('/api/pricing')
+      .then(res => res.json())
+      .then(data => setPricingData(data))
+      .catch(() => setPricingData(defaultPricingData))
   }, [])
-
-  // Save pricing data whenever it changes (but not on initial load)
-  useEffect(() => {
-    if (pricingData !== null) {
-      savePricingData(pricingData)
-    }
-  }, [pricingData])
 
   const tabs = [
     { id: 'inStudio', label: 'IN STUDIO SPRAY' },
@@ -289,10 +285,44 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
     })
   }
 
-  const handleResetToDefault = () => {
-    if (confirm('Are you sure you want to reset all pricing data to default? This cannot be undone.')) {
-      localStorage.removeItem('ritzy-mist-pricing-data')
+  const handlePublishChanges = async () => {
+    if (!pricingData) return
+    setIsSaving(true)
+    setSaveMessage(null)
+    try {
+      const res = await fetch('/api/pricing', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, data: pricingData })
+      })
+      if (!res.ok) throw new Error('Failed')
+      setSaveMessage({ type: 'success', text: 'Changes published! All visitors will see the updated pricing.' })
+    } catch {
+      setSaveMessage({ type: 'error', text: 'Failed to save. Please try again.' })
+    } finally {
+      setIsSaving(false)
+      setTimeout(() => setSaveMessage(null), 5000)
+    }
+  }
+
+  const handleResetToDefault = async () => {
+    if (!confirm('Are you sure you want to reset all pricing data to default? This cannot be undone.')) return
+    setIsSaving(true)
+    setSaveMessage(null)
+    try {
+      const res = await fetch('/api/pricing', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, data: defaultPricingData })
+      })
+      if (!res.ok) throw new Error('Failed')
       setPricingData(defaultPricingData)
+      setSaveMessage({ type: 'success', text: 'Reset to defaults and published.' })
+    } catch {
+      setSaveMessage({ type: 'error', text: 'Failed to reset. Please try again.' })
+    } finally {
+      setIsSaving(false)
+      setTimeout(() => setSaveMessage(null), 5000)
     }
   }
 
@@ -528,14 +558,31 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
         confirmText="Delete"
       />
 
-      {/* Reset Button */}
-      <div className="mb-4 flex justify-end">
-        <button
-          onClick={handleResetToDefault}
-          className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 text-sm"
-        >
-          Reset to Default
-        </button>
+      {/* Action Bar */}
+      <div className="mb-4 flex justify-between items-center gap-4 flex-wrap">
+        <div className="flex-1">
+          {saveMessage && (
+            <p className={`text-sm font-semibold ${saveMessage.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+              {saveMessage.text}
+            </p>
+          )}
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={handleResetToDefault}
+            disabled={isSaving}
+            className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 text-sm disabled:opacity-50"
+          >
+            Reset to Default
+          </button>
+          <button
+            onClick={handlePublishChanges}
+            disabled={isSaving}
+            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-bold disabled:opacity-50"
+          >
+            {isSaving ? 'Saving...' : 'Publish Changes'}
+          </button>
+        </div>
       </div>
 
       {/* Folder-style tabs */}

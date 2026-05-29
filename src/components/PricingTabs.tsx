@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { loadPricingData, type PricingData } from '@/lib/pricingData'
+import { type PricingData } from '@/lib/pricingData'
 
 // Types
 interface Tab {
@@ -25,9 +25,11 @@ const PricingTabsComponent: React.FC<PricingTabsComponentProps> = ({
   const [activeTab, setActiveTab] = useState(initialActiveTab)
   const [pricingData, setPricingData] = useState<PricingData | null>(null)
 
-  // Load pricing data on mount
   useEffect(() => {
-    setPricingData(loadPricingData())
+    fetch('/api/pricing')
+      .then(res => res.json())
+      .then(data => setPricingData(data))
+      .catch(() => setPricingData(null))
   }, [])
 
   // Helper function to convert service title to URL slug

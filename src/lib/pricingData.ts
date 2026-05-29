@@ -189,38 +189,3 @@ export const createServiceSlug = (title: string): string => {
     .replace(/\s+/g, '-')
 }
 
-// Storage keys
-const STORAGE_KEY = 'ritzy-mist-pricing-data'
-
-// Load pricing data from localStorage or return default
-export const loadPricingData = (): PricingData => {
-  if (typeof window === 'undefined') return defaultPricingData
-  
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) {
-      return JSON.parse(stored)
-    }
-  } catch (error) {
-    console.error('Error loading pricing data:', error)
-  }
-  return defaultPricingData
-}
-
-// Save pricing data to localStorage
-export const savePricingData = (data: PricingData): void => {
-  if (typeof window === 'undefined') return
-  
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-  } catch (error) {
-    console.error('Error saving pricing data:', error)
-  }
-}
-
-// Reset to default pricing data
-export const resetPricingData = (): void => {
-  if (typeof window === 'undefined') return
-  localStorage.removeItem(STORAGE_KEY)
-}
-

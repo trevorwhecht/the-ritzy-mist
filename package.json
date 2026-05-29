@@ -12,6 +12,7 @@
     "@google-cloud/local-auth": "^2.1.1",
     "@nextui-org/react": "^2.6.11",
     "@sendgrid/mail": "^8.1.4",
+    "@vercel/blob": "^2.4.0",
     "framer-motion": "^12.4.7",
     "googleapis": "^105.0.0",
     "lucide-react": "^0.475.0",
