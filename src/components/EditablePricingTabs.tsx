@@ -5,9 +5,12 @@ import { motion } from 'framer-motion'
 import {
   PricingData,
   PricingItem,
+  PricingTabData,
   defaultPricingData
 } from '@/lib/pricingData'
 import ConfirmDialog from './ConfirmDialog'
+import ReorderList from './ReorderList'
+import PricingTabsSkeleton from './PricingTabs-Skeleton'
 
 interface EditablePricingTabsProps {
   className?: string
@@ -36,7 +39,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
   } | null>(null)
 
   useEffect(() => {
-    fetch('/api/pricing')
+    fetch('/api/content/pricing')
       .then(res => res.json())
       .then(data => setPricingData(data))
       .catch(() => setPricingData(defaultPricingData))
@@ -132,6 +135,29 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
         )
       }
     })
+  }
+
+  // Reorder handlers (drag-and-drop)
+  const handleReorderServices = (tab: 'inStudio' | 'mobile', services: PricingItem[]) => {
+    if (!pricingData) return
+    setPricingData({ ...pricingData, [tab]: { ...pricingData[tab], services } })
+  }
+
+  const handleReorderAddOns = (tab: 'inStudio' | 'mobile', items: NonNullable<PricingTabData['addOns']>['items']) => {
+    if (!pricingData) return
+    const addOns = pricingData[tab].addOns
+    if (!addOns) return
+    setPricingData({ ...pricingData, [tab]: { ...pricingData[tab], addOns: { ...addOns, items } } })
+  }
+
+  const handleReorderGroupItems = (items: PricingData['group']['items']) => {
+    if (!pricingData) return
+    setPricingData({ ...pricingData, group: { ...pricingData.group, items } })
+  }
+
+  const handleReorderGroupSections = (sections: PricingData['group']['sections']) => {
+    if (!pricingData) return
+    setPricingData({ ...pricingData, group: { ...pricingData.group, sections } })
   }
 
   // Add-ons editing functions
@@ -290,7 +316,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
     setIsSaving(true)
     setSaveMessage(null)
     try {
-      const res = await fetch('/api/pricing', {
+      const res = await fetch('/api/content/pricing', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password, data: pricingData })
@@ -310,7 +336,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
     setIsSaving(true)
     setSaveMessage(null)
     try {
-      const res = await fetch('/api/pricing', {
+      const res = await fetch('/api/content/pricing', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password, data: defaultPricingData })
@@ -326,11 +352,11 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
     }
   }
 
-  const renderEditableService = (service: PricingItem, tab: 'inStudio' | 'mobile') => {
+  const renderEditableService = (service: PricingItem, tab: 'inStudio' | 'mobile', grip: React.ReactNode) => {
     const isEditing = editingId === service.id
 
     return (
-      <div key={service.id} className="border-b border-gray-600 pb-4 relative">
+      <div className="border-b border-gray-600 pb-4 relative">
         {isEditing ? (
           <div className="space-y-3">
             <input
@@ -396,6 +422,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
               <p className="text-gray-300">{service.description}</p>
             </div>
             <div className="flex gap-2 items-start">
+              {grip}
               <button
                 onClick={() => setEditingId(service.id)}
                 className="px-3 py-1 bg-[#d59586] text-white text-sm rounded hover:opacity-80 transition-opacity"
@@ -464,9 +491,13 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
           </div>
         )}
 
-        <div className="space-y-4">
-          {addOns.items.map((item, index) => (
-            <div key={index} className="border-b border-gray-700 pb-4 relative">
+        <ReorderList
+          items={addOns.items}
+          onReorder={(items) => handleReorderAddOns(tab, items)}
+          className="space-y-4"
+        >
+          {(item, index, grip) => (
+            <div className="border-b border-gray-700 pb-4 relative">
               {editingAddOn?.tab === tab && editingAddOn.index === index ? (
                 <div className="space-y-2">
                   <input
@@ -512,6 +543,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
                     <p className="text-gray-300">{item.description}</p>
                   </div>
                   <div className="flex gap-2">
+                    {grip}
                     <button
                       onClick={() => setEditingAddOn({ tab, index })}
                       className="px-3 py-1 bg-[#d59586] text-white text-sm rounded hover:opacity-80 transition-opacity"
@@ -529,8 +561,8 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
                 </div>
               )}
             </div>
-          ))}
-        </div>
+          )}
+        </ReorderList>
 
         <button
           onClick={() => handleAddAddOn(tab)}
@@ -544,7 +576,7 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
 
   // Wait for data to load
   if (pricingData === null) {
-    return <div className={`text-white ${className}`}>Loading...</div>
+    return <PricingTabsSkeleton className={className} />
   }
 
   return (
@@ -644,9 +676,13 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
                 </button>
               </div>
 
-              <div className="space-y-6">
-                {pricingData.inStudio.services.map(service => renderEditableService(service, 'inStudio'))}
-              </div>
+              <ReorderList
+                items={pricingData.inStudio.services}
+                onReorder={(services) => handleReorderServices('inStudio', services)}
+                className="space-y-6"
+              >
+                {(service, _index, grip) => renderEditableService(service, 'inStudio', grip)}
+              </ReorderList>
 
               {renderEditableAddOns('inStudio')}
             </div>
@@ -672,9 +708,13 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
                 </button>
               </div>
 
-              <div className="space-y-6">
-                {pricingData.mobile.services.map(service => renderEditableService(service, 'mobile'))}
-              </div>
+              <ReorderList
+                items={pricingData.mobile.services}
+                onReorder={(services) => handleReorderServices('mobile', services)}
+                className="space-y-6"
+              >
+                {(service, _index, grip) => renderEditableService(service, 'mobile', grip)}
+              </ReorderList>
 
               {renderEditableAddOns('mobile')}
             </div>
@@ -723,9 +763,13 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
                       + Add
                     </button>
                   </div>
-                  <div className="space-y-3">
-                    {pricingData.group.items.map((item, index) => (
-                      <div key={index} className="flex justify-between items-center">
+                  <ReorderList
+                    items={pricingData.group.items}
+                    onReorder={handleReorderGroupItems}
+                    className="space-y-3"
+                  >
+                    {(item, index, grip) => (
+                      <div className="flex justify-between items-center">
                         {editingGroupItem === index ? (
                           <div className="flex gap-2 flex-1">
                             <input
@@ -766,12 +810,13 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
                               {item.label}
                             </span>
                             <div className="flex items-center gap-2">
-                              <span 
+                              <span
                                 className="text-xl font-bold text-[#d59586] cursor-pointer hover:opacity-80"
                                 onClick={() => setEditingGroupItem(index)}
                               >
                                 {item.value}
                               </span>
+                              {grip}
                               <button
                                 onClick={() => setEditingGroupItem(index)}
                                 className="px-3 py-1 bg-[#d59586] text-white text-sm rounded hover:opacity-80 transition-opacity"
@@ -789,13 +834,18 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
                           </>
                         )}
                       </div>
-                    ))}
-                  </div>
+                    )}
+                  </ReorderList>
                 </div>
 
                 {/* Sections */}
-                {pricingData.group.sections.map((section, index) => (
-                  <div key={index} className="border-b border-gray-600 pb-4">
+                <ReorderList
+                  items={pricingData.group.sections}
+                  onReorder={handleReorderGroupSections}
+                  className="space-y-6"
+                >
+                  {(section, index, grip) => (
+                  <div className="border-b border-gray-600 pb-4">
                     {editingGroupSection === index ? (
                       <div className="space-y-2">
                         <input
@@ -818,23 +868,27 @@ const EditablePricingTabs: React.FC<EditablePricingTabsProps> = ({ className = '
                         </button>
                       </div>
                     ) : (
-                      <>
-                        <h4 
-                          className="text-xl font-bold text-white mb-2 cursor-pointer hover:opacity-80"
-                          onClick={() => setEditingGroupSection(index)}
-                        >
-                          {section.title}
-                        </h4>
-                        <p 
-                          className="text-gray-300 cursor-pointer hover:opacity-80"
-                          onClick={() => setEditingGroupSection(index)}
-                        >
-                          {section.content}
-                        </p>
-                      </>
+                      <div className="flex items-start gap-2">
+                        <div className="flex-1">
+                          <h4
+                            className="text-xl font-bold text-white mb-2 cursor-pointer hover:opacity-80"
+                            onClick={() => setEditingGroupSection(index)}
+                          >
+                            {section.title}
+                          </h4>
+                          <p
+                            className="text-gray-300 cursor-pointer hover:opacity-80"
+                            onClick={() => setEditingGroupSection(index)}
+                          >
+                            {section.content}
+                          </p>
+                        </div>
+                        {grip}
+                      </div>
                     )}
                   </div>
-                ))}
+                  )}
+                </ReorderList>
 
                 {/* Footer */}
                 {pricingData.group.footer && (

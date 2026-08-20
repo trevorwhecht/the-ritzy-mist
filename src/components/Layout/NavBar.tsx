@@ -19,7 +19,8 @@ import Image from 'next/image'
 const NavLinks: Record<string, string> = {
   'About': "/about-me",
   'Services': "/services",
-  'Pricing': "/pricing"
+  'Pricing': "/pricing",
+  'Book Now': "/services/spraytans"
 }
 
 export default function Nav() {

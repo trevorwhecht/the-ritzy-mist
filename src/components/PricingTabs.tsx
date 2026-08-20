@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { type PricingData } from '@/lib/pricingData'
+import PricingTabsSkeleton from './PricingTabs-Skeleton'
 
 // Types
 interface Tab {
@@ -26,7 +27,7 @@ const PricingTabsComponent: React.FC<PricingTabsComponentProps> = ({
   const [pricingData, setPricingData] = useState<PricingData | null>(null)
 
   useEffect(() => {
-    fetch('/api/pricing')
+    fetch('/api/content/pricing')
       .then(res => res.json())
       .then(data => setPricingData(data))
       .catch(() => setPricingData(null))
@@ -46,7 +47,7 @@ const PricingTabsComponent: React.FC<PricingTabsComponentProps> = ({
 
   // Wait for data to load
   if (!pricingData) {
-    return <div className={`text-white ${className}`}>Loading...</div>
+    return <PricingTabsSkeleton className={className} />
   }
 
   const tabs: Tab[] = [

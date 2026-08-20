@@ -45,11 +45,8 @@ export default function RootLayout({
       <meta name="twitter:description" content="Professional mobile spray tanning services. Book your appointment today!" />
       <meta name="twitter:image" content="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/RitzyMist-Landscape.jpg" />
       
-      {/* Favicon */}
-      <link rel="icon" type="image/png" href="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/favIcon.png" />
-      <link rel="shortcut icon" type="image/png" href="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/favIcon.png" />
-      <link rel="apple-touch-icon" href="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/favIcon.png" />
-      
+      {/* Favicon auto-generated from src/app/icon.png */}
+
       <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
       {/* Meta Pixel Code */}
       <Script id="facebook-pixel" strategy="afterInteractive">
