@@ -52,7 +52,7 @@ export default function GoogleReviews({ place }: { place: GooglePlace }) {
               )}
               <div className="min-w-0">
                 {r.authorUri ? (
-                  <a href={r.authorUri} target="_blank" rel="noopener noreferrer" className="block font-semibold break-words">
+                  <a href={r.authorUri} target="_blank" rel="noopener noreferrer" className="block font-semibold break-words pointer-events-auto">
                     {r.authorName}
                   </a>
                 ) : (
