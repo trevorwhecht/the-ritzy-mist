@@ -7,6 +7,14 @@ if (!apiKey) {
 }
 sgMail.setApiKey(apiKey || '');
 
+const escapeHtml = (s: unknown) =>
+  String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -36,7 +44,7 @@ export async function POST(req: Request) {
       },
       subject: groupSize ? `New Group Booking Inquiry (${groupSize} people)` : 'New Contact Form Submission',
       text: messageContent,
-      html: messageContent.replace(/\n/g, '<br>'),
+      html: escapeHtml(messageContent).replace(/\n/g, '<br>'),
       replyTo: email
     };
 
