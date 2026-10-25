@@ -26,7 +26,7 @@ export default function AddOnMenu() {
 
           <div>
             <h4 className="text-xl font-bold mb-2">💧 Skin Enhancers — $8 each</h4>
-            <p className="text-gray-300 mb-2">Targeted additives to elevate your tan and skin's appearance:</p>
+            <p className="text-gray-300 mb-2">Targeted additives to elevate your tan and skin&apos;s appearance:</p>
             <ul className="text-gray-300 space-y-1 ml-4">
               <li>• Anti-Aging — helps smooth fine lines and boost elasticity</li>
               <li>• Skin Firming — tones and tightens for a youthful glow</li>

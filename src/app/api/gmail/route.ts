@@ -43,7 +43,8 @@ export async function POST(req: Request) {
     try {
       await sgMail.send(msg);
       return NextResponse.json({ success: true });
-    } catch (error: any) {
+    } catch (err) {
+      const error = err as { message?: string; code?: unknown; response?: { body?: { errors?: { message?: string }[] }; headers?: unknown } }
       console.error('SendGrid Error Details:', {
         message: error.message,
         response: error.response?.body,

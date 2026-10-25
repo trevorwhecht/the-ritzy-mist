@@ -57,7 +57,7 @@ export default function PriceList() {
                 <motion.div custom={0} variants={textVariants}>
                   <h2 className="text-3xl font-bold mb-2">OG MIST $75+</h2>
                   <p className="text-lg mb-2">• Develops in 8 hours, complements your unique skin tone.</p>
-                  <p className="text-lg mb-2">• This option is perfect for those who don't mind the wait and want a rich, natural-looking bronze with full hydration and longevity.</p>
+                  <p className="text-lg mb-2">• This option is perfect for those who don&apos;t mind the wait and want a rich, natural-looking bronze with full hydration and longevity.</p>
                   <p className="text-lg">• Ideal for those who can leave the tan on overnight for optimal results.</p>
                 </motion.div>
 
@@ -133,7 +133,7 @@ export default function PriceList() {
               <h3 className="text-4xl font-bold mb-4 text-[#d59586]">$75+</h3>
               <div className="space-y-3 text-left">
                 <p className="text-lg">• Develops in 8 hours, complements your unique skin tone.</p>
-                <p className="text-lg">• This option is perfect for those who don't mind the wait and want a rich, natural-looking bronze with full hydration and longevity.</p>
+                <p className="text-lg">• This option is perfect for those who don&apos;t mind the wait and want a rich, natural-looking bronze with full hydration and longevity.</p>
                 <p className="text-lg">• Ideal for those who can leave the tan on overnight for optimal results.</p>
               </div>
             </motion.div>
