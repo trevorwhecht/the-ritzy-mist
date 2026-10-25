@@ -4,7 +4,7 @@
   .hero-section {
     @apply relative;
     @apply w-full;
-    @apply min-h-screen;
+    @apply min-h-[60dvh]; /* Short enough that the reviews section peeks above the fold */
     @apply flex;
     @apply items-center;
     @apply justify-center;

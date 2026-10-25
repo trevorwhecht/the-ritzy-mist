@@ -13,7 +13,15 @@ const subscribe = (onChange: () => void) => {
 }
 
 // Endless display-only carousel, same loop setup as onewitharts PrintPortfolio.
-export default function LoopCarousel({ children, itemClassName }: { children: React.ReactNode[]; itemClassName?: string }) {
+export default function LoopCarousel({
+  children,
+  itemClassName,
+  speed = 0.75,
+}: {
+  children: React.ReactNode[]
+  itemClassName?: string
+  speed?: number
+}) {
   const railRef = useRef<HTMLDivElement>(null)
   // null on the server and during hydration, so the rail stays hidden until mounted.
   const isDesktop = useSyncExternalStore(subscribe, () => window.matchMedia(DESKTOP_QUERY).matches, () => null)
@@ -36,7 +44,7 @@ export default function LoopCarousel({ children, itemClassName }: { children: Re
         if (++tries < 20) frame = requestAnimationFrame(init)
         return
       }
-      tl = horizontalLoop(items, { repeat: -1, speed: 0.75, paddingRight: 0, paused: false })
+      tl = horizontalLoop(items, { repeat: -1, speed, paddingRight: 0, paused: false })
     }
     const teardown = () => {
       cancelAnimationFrame(frame)
@@ -62,7 +70,7 @@ export default function LoopCarousel({ children, itemClassName }: { children: Re
       clearTimeout(timer)
       teardown()
     }
-  }, [mounted, isDesktop, count])
+  }, [mounted, isDesktop, count, speed])
 
   return (
     <div
