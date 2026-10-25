@@ -9,6 +9,7 @@
     @apply items-center;
     @apply justify-center;
     margin-top: -64px; /* Offset for the header height */
+    padding-top: 64px; /* Center content in the area below the nav, not behind it */
   }
 
   .video-background {
@@ -27,7 +28,6 @@
     @apply flex;
     @apply flex-col;
     @apply items-center;
-    transform: translateY(-32px); /* Slight upward adjustment to account for visual weight */
   }
 
   .hero-content h2 {
