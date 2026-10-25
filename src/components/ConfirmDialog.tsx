@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 interface ConfirmDialogProps {
   isOpen: boolean
   title: string
-  message: string
+  message: React.ReactNode
   onConfirm: () => void
   onCancel: () => void
   confirmText?: string

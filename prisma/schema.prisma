@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum SkinTone {
+  PINK
+  OLIVE
+}
+
+enum ServiceLocation {
+  STUDIO
+  MOBILE
+}
+
+enum AppointmentStatus {
+  BOOKED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  INCOMPLETE
+}
+
+model User {
+  id               String    @id @default(cuid())
+  firstName        String
+  lastName         String
+  /// Contact info + guest-matching heuristic. Deliberately NOT unique (unverified).
+  phone            String?
+  /// The account identifier.
+  email            String?   @unique
+  /// bcrypt; null for guests and Google sign-ins.
+  password         String?
+  /// The only guest test. Never infer from password === null.
+  isGuest          Boolean   @default(false)
+  role             Role      @default(CUSTOMER)
+  /// 1–6 Fitzpatrick. Range enforced by CHECK constraint in migration SQL.
+  skinType         Int?
+  skinTone         SkinTone?
+  instagram        String?
+  adminNotes       String?
+  stripeCustomerId String?   @unique
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  appointments Appointment[]
+  subscription Subscription?
+}
+
+model Service {
+  id          String          @id @default(cuid())
+  slug        String          @unique
+  name        String
+  description String
+  priceCents  Int
+  durationMin Int             @default(45)
+  location    ServiceLocation
+  isActive    Boolean         @default(true)
+  sortOrder   Int             @default(0)
+
+  appointments Appointment[]
+}
+
+model AddOn {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  description String?
+  priceCents  Int
+  isActive    Boolean @default(true)
+  sortOrder   Int     @default(0)
+
+  appointments AppointmentAddOn[]
+}
+
+model Appointment {
+  id String @id @default(cuid())
+  /// Public share / claim link. 43-char base64url from lib/tokenGenerator.
+  token String @unique
+  /// null = "No Account Yet" (admin-created, claimable via the link).
+  userId               String?
+  serviceId            String
+  startAt              DateTime          @db.Timestamptz(3)
+  endAt                DateTime          @db.Timestamptz(3)
+  status               AppointmentStatus @default(BOOKED)
+  occasion             String?
+  clientNotes          String?
+  adminNotes           String?
+  address              String?
+  priceCents           Int
+  paidWithSubscription Boolean           @default(false)
+  createdByAdmin       Boolean           @default(false)
+  icalUid              String?           @unique
+  icalUrl              String?
+  icalEtag             String?
+  cancelledAt          DateTime?
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  user    User?   @relation(fields: [userId], references: [id])
+  service Service @relation(fields: [serviceId], references: [id])
+  addOns  AppointmentAddOn[]
+
+  @@index([startAt])
+  @@index([userId])
+}
+
+model AppointmentAddOn {
+  appointmentId String
+  addOnId       String
+  priceCents    Int
+
+  appointment Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  addOn       AddOn       @relation(fields: [addOnId], references: [id])
+
+  @@id([appointmentId, addOnId])
+}
+
+model Subscription {
+  id                    String             @id @default(cuid())
+  userId                String             @unique
+  stripeSubscriptionId  String             @unique
+  stripePriceId         String
+  status                SubscriptionStatus
+  currentPeriodEnd      DateTime
+  cancelAtPeriodEnd     Boolean            @default(false)
+  tansIncludedPerPeriod Int
+  tansUsedThisPeriod    Int                @default(0)
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+/// External (Apple Calendar) busy time, already expanded from recurrences. Cache, not truth.
+model ExternalBusyBlock {
+  id           String   @id @default(cuid())
+  calendarName String
+  uid          String
+  summary      String?
+  startAt      DateTime @db.Timestamptz(3)
+  endAt        DateTime @db.Timestamptz(3)
+  isAllDay     Boolean  @default(false)
+  syncedAt     DateTime @default(now())
+
+  @@index([startAt, endAt])
+}
+
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}

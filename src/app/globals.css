@@ -11,16 +11,27 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --hover-color: #d59586;
+  /* Brand + surface tokens. Single-look dark site: no prefers-color-scheme swap. */
+  --color-primary: #d59586;
+  --color-primary-hover: #c48576;
+  --color-background: #000000;
+  --color-surface: #18181b;
+  --color-border: #3f3f46;
+  --color-foreground: #ffffff;
+  --color-muted: #a1a1aa;
+  --color-danger: #f87171;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+
+  /* Legacy aliases still referenced by existing pages */
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
+  --hover-color: var(--color-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
 }
 
 body {

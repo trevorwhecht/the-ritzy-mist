@@ -9,12 +9,14 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link as NextUILink,
-} from "@nextui-org/react"
+  Link as HeroLink,
+} from "@heroui/react"
 import { usePathname, useRouter } from 'next/navigation'
-import { Instagram } from 'lucide-react'
+import { Instagram, UserRound, X } from 'lucide-react'
 import NextLink from 'next/link'
 import Image from 'next/image'
+import { useAuthModal } from '@/contexts/AuthModalContext'
+import AccountMenu from '@/components/accountMenu/accountMenu'
 
 const NavLinks: Record<string, string> = {
   'About': "/about-me",
@@ -27,6 +29,17 @@ export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const pathname = usePathname()
   const router = useRouter()
+  const { isAuthModalOpen, openAuthModal, closeAuthModal } = useAuthModal()
+
+  const accountButton = (
+    <button
+      aria-label={isAuthModalOpen ? 'Close account menu' : 'Open account menu'}
+      onClick={() => (isAuthModalOpen ? closeAuthModal() : openAuthModal())}
+      className="min-w-11 min-h-11 touch-manipulation flex items-center justify-center text-[var(--color-foreground)] hover:text-[var(--color-primary)] focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:outline-none rounded"
+    >
+      {isAuthModalOpen ? <X className="w-6 h-6" aria-hidden /> : <UserRound className="w-6 h-6" aria-hidden />}
+    </button>
+  )
 
   const menuItems = Object.entries(NavLinks).map(([name, href]) => ({
     name,
@@ -50,7 +63,7 @@ export default function Nav() {
         {/* Left column - logo */}
         <div className="w-[200px] flex justify-start -ml-4">
           <NavbarBrand>
-            <NextUILink as={NextLink} href="/" className="font-['Pinyon Script'] text-2xl text-white">
+            <HeroLink as={NextLink} href="/" className="font-['Pinyon Script'] text-2xl text-white">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Ritzy%20Mist%20Branding%20(1)-qMybz9vMh07GWSE8i1V1TujnIkb9eB.png"
                 alt="Ritzy Mist"
@@ -58,15 +71,16 @@ export default function Nav() {
                 height={50}
                 className="mb-1"
               />
-            </NextUILink>
+            </HeroLink>
           </NavbarBrand>
         </div>
         
         {/* Center column - empty space to balance the layout */}
         <div className="flex-1"></div>
         
-        {/* Right column - menu toggle */}
-        <div className="w-[80px] flex justify-end">
+        {/* Right column - account + menu toggle */}
+        <div className="w-[100px] flex justify-end items-center">
+          {accountButton}
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             className="text-white p-2 min-w-[44px] min-h-[44px]"
@@ -77,47 +91,47 @@ export default function Nav() {
       <NavbarMenu className="bg-black/90 pt-6">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item.name}-${index}`}>
-            <NextUILink
+            <HeroLink
               color="foreground"
               className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
               onPress={() => handleNavigation(item.href)}
             >
               {item.name}
-            </NextUILink>
+            </HeroLink>
           </NavbarMenuItem>
         ))}
         
         <NavbarMenuItem>
-          <NextUILink
+          <HeroLink
             color="foreground"
             className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
             onPress={() => handleNavigation('/spraytancare')}
           >
             Spray Tan Care
-          </NextUILink>
+          </HeroLink>
         </NavbarMenuItem>
         
         <NavbarMenuItem>
-          <NextUILink
+          <HeroLink
             color="foreground"
             className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
             onPress={() => handleNavigation('/policies')}
           >
             Policies
-          </NextUILink>
+          </HeroLink>
         </NavbarMenuItem>
         
         <div className="w-full flex justify-center mt-auto pb-12">
-          <NextUILink href="https://instagram.com/theritzymist" target="_blank" rel="noopener noreferrer">
+          <HeroLink href="https://instagram.com/theritzymist" target="_blank" rel="noopener noreferrer">
             <Instagram className="w-6 h-6 text-white hover:text-gray-300" />
-          </NextUILink>
+          </HeroLink>
         </div>
       </NavbarMenu>
 
       {/*Desktop view*/}
       <NavbarContent className="hidden sm:flex gap-6" justify="center">
         <NavbarBrand className="mr-4">
-          <NextUILink as={NextLink} href="/" className="font-['Pinyon Script'] text-2xl text-white">
+          <HeroLink as={NextLink} href="/" className="font-['Pinyon Script'] text-2xl text-white">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Ritzy%20Mist%20Branding%20(1)-qMybz9vMh07GWSE8i1V1TujnIkb9eB.png"
               alt="Ritzy Mist"
@@ -125,11 +139,11 @@ export default function Nav() {
               height={50}
               className="mb-1"
             />
-          </NextUILink>
+          </HeroLink>
         </NavbarBrand>
         {Object.entries(NavLinks).map(([name, href]) => (
           <NavbarItem key={name} isActive={pathname === href}>
-            <NextUILink 
+            <HeroLink 
               as={NextLink}
               href={href} 
               className={`text-white text-lg font-[AlegreyaSansSC] ${
@@ -139,29 +153,32 @@ export default function Nav() {
               }`}
             >
               {name}
-            </NextUILink>
+            </HeroLink>
           </NavbarItem>
         ))}
         <NavbarItem>
-          <NextUILink href="/spraytancare" className="text-white text-lg font-[AlegreyaSansSC] hover:text-[#d59586]">
+          <HeroLink href="/spraytancare" className="text-white text-lg font-[AlegreyaSansSC] hover:text-[#d59586]">
             Spray Tan Care
-          </NextUILink>
+          </HeroLink>
         </NavbarItem>
         <NavbarItem>
-          <NextUILink href="/policies" className="text-white text-lg font-[AlegreyaSansSC] hover:text-[#d59586]">
+          <HeroLink href="/policies" className="text-white text-lg font-[AlegreyaSansSC] hover:text-[#d59586]">
             Policies
-          </NextUILink>
+          </HeroLink>
         </NavbarItem>
       </NavbarContent>
 
       {/* Social Links for desktop */}
       <NavbarContent className="hidden sm:flex" justify="end">
+        <NavbarItem>{accountButton}</NavbarItem>
         <NavbarItem>
-          <NextUILink href="https://instagram.com/theritzymist" target="_blank" rel="noopener noreferrer">
+          <HeroLink href="https://instagram.com/theritzymist" target="_blank" rel="noopener noreferrer">
             <Instagram className="w-5 h-5 text-white hover:text-[#d59586]" />
-          </NextUILink>
+          </HeroLink>
         </NavbarItem>
       </NavbarContent>
+
+      <AccountMenu isOpen={isAuthModalOpen} onClose={closeAuthModal} />
     </Navbar>
   )
 } 
