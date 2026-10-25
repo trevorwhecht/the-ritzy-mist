@@ -19,7 +19,8 @@ import Image from 'next/image'
 const NavLinks: Record<string, string> = {
   'About': "/about-me",
   'Services': "/services",
-  'Pricing': "/pricing"
+  'Pricing': "/pricing",
+  'Book Now': "/services/spraytans"
 }
 
 export default function Nav() {
@@ -41,11 +42,11 @@ export default function Nav() {
     <Navbar 
       onMenuOpenChange={setIsMenuOpen}
       isMenuOpen={isMenuOpen}
-      className="bg-black/90 text-white"
+      className="bg-black/90 text-white sm:h-auto h-16"
       maxWidth="full"
     >
       {/* Mobile view with 3-column layout for perfect centering */}
-      <div className="w-full flex items-center sm:hidden">
+      <div className="w-full flex items-center sm:hidden h-16">
         {/* Left column - logo */}
         <div className="w-[200px] flex justify-start -ml-4">
           <NavbarBrand>
@@ -65,10 +66,10 @@ export default function Nav() {
         <div className="flex-1"></div>
         
         {/* Right column - menu toggle */}
-        <div className="w-[60px] flex justify-end">
+        <div className="w-[80px] flex justify-end">
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="text-white"
+            className="text-white p-2 min-w-[44px] min-h-[44px]"
           />
         </div>
       </div>
@@ -79,7 +80,7 @@ export default function Nav() {
             <NextUILink
               color="foreground"
               className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
-              onClick={() => handleNavigation(item.href)}
+              onPress={() => handleNavigation(item.href)}
             >
               {item.name}
             </NextUILink>
@@ -90,7 +91,7 @@ export default function Nav() {
           <NextUILink
             color="foreground"
             className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
-            onClick={() => handleNavigation('/care')}
+            onPress={() => handleNavigation('/spraytancare')}
           >
             Spray Tan Care
           </NextUILink>
@@ -100,7 +101,7 @@ export default function Nav() {
           <NextUILink
             color="foreground"
             className="w-full text-white hover:text-[#d59586] text-2xl py-2 font-[AlegreyaSansSC]"
-            onClick={() => handleNavigation('/policies')}
+            onPress={() => handleNavigation('/policies')}
           >
             Policies
           </NextUILink>
@@ -142,7 +143,7 @@ export default function Nav() {
           </NavbarItem>
         ))}
         <NavbarItem>
-          <NextUILink href="/care" className="text-white text-lg font-[AlegreyaSansSC] hover:text-[#d59586]">
+          <NextUILink href="/spraytancare" className="text-white text-lg font-[AlegreyaSansSC] hover:text-[#d59586]">
             Spray Tan Care
           </NextUILink>
         </NavbarItem>

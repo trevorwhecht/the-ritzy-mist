@@ -11,9 +11,10 @@ const GoogleBookingWidget: React.FC<GoogleBookingWidgetProps> = React.memo(({ sr
   const iframeHtml = useMemo(() => `
     <iframe
       src="${src}"
-      style="border: 0; max-width: 1200px; width: 100%; height: 1400px; margin: 0 auto; display: block; background: transparent;"
-      class="h-[1400px] md:h-[1000px]"
+      style="border: 0; max-width: 1200px; width: 100%; height: 1800px; margin: 0 auto; display: block; background: transparent; overflow: hidden;"
+      class="h-[1800px] md:h-[750px]"
       frameborder="0"
+      scrolling="no"
     ></iframe>
   `, [src]);
 

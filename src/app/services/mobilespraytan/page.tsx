@@ -14,7 +14,7 @@ export default function MobileSprayTanBooking() {
   }, []);
 
   return (
-    <div className="relative z-10 min-h-screen">
+    <div className="relative z-10 min-h-[500vh] lg:min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <div className="header-line my-8"></div>
         <div className="flex justify-center">
@@ -60,7 +60,10 @@ export default function MobileSprayTanBooking() {
             <SkinTypes />
           </div>
         </div>
+        
+        {/* Extra spacing for mobile to eliminate widget scrolling */}
+        <div className="block lg:hidden h-[200vh]"></div>
       </div>
     </div>
   );
-} 
+}

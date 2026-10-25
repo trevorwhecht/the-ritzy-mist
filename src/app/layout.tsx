@@ -3,6 +3,7 @@ import Footer from "@/components/Layout/Footer"
 import NavBar from "@/components/Layout/NavBar"
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "./providers";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,10 +31,51 @@ export default function RootLayout({
         name="viewport" 
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" 
       />
+      
+      {/* Open Graph Meta Tags */}
+      <meta property="og:title" content="The Ritzy Mist - Mobile Spray Tanning" />
+      <meta property="og:description" content="Professional mobile spray tanning services. Book your appointment today!" />
+      <meta property="og:image" content="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/RitzyMist-Landscape.jpg" />
+      <meta property="og:url" content="https://theritzymist.com" />
+      <meta property="og:type" content="website" />
+      
+      {/* Twitter Card Meta Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="The Ritzy Mist - Mobile Spray Tanning" />
+      <meta name="twitter:description" content="Professional mobile spray tanning services. Book your appointment today!" />
+      <meta name="twitter:image" content="https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/RitzyMist-Landscape.jpg" />
+      
+      {/* Favicon auto-generated from src/app/icon.png */}
+
       <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      {/* Meta Pixel Code */}
+      <Script id="facebook-pixel" strategy="afterInteractive">
+        {`
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '24844063038547006');
+          fbq('track', 'PageView');
+        `}
+      </Script>
+      {/* End Meta Pixel Code */}
     </head>
       <body className="relative bg-black">
-         <video 
+        <noscript>
+          <img 
+            height="1" 
+            width="1" 
+            style={{display: 'none'}}
+            src="https://www.facebook.com/tr?id=24844063038547006&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+        <video 
           autoPlay 
           muted 
           loop 
@@ -51,7 +93,7 @@ export default function RootLayout({
         <div className="fixed top-0 left-0 right-0 z-50 bg-opacity-90 bg-black">
           <NavBar />
         </div>
-        <main className="pt-[65px]">{children}</main>
+        <main className="pt-16 sm:pt-[65px]">{children}</main>
         <Footer />
       </body>
      

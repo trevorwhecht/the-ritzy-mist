@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import { SectionHeader } from '@/components/SectionHeader'
+import { aboutParagraphs } from '@/lib/aboutData'
+
+const bodyClass = 'text-sm flex-1 leading-7 sm:w-[calc(100%-380px)] sm:pr-6'
 
 export default function AboutMePage() {
   return (
@@ -32,19 +35,13 @@ export default function AboutMePage() {
               />
             </div>
             <section className="min-h-max mx-5">
-              <p className="text-sm flex-1 leading-7 sm:w-[calc(100%-380px)] sm:pr-6">
-                Hi, I&apos;m Weslee Courtright! As a fun-loving girl&apos;s girl and driven entrepreneur, 
-                I&apos;m passionate about helping others feel confident and beautiful in their own skin. 
-                My journey in the beauty industry has been fueled by my love for making people feel 
-                their absolute best, especially when it comes to achieving that perfect, natural-looking glow.
-              </p>
-              <p>&nbsp;</p>
-              <p className="text-sm flex-1 leading-7 sm:w-[calc(100%-380px)] sm:pr-6">
-                I believe that everyone deserves to feel radiant and self-assured, 
-                which is why I&apos;ve dedicated myself to mastering the art of spray tanning. 
-                My approach combines professional expertise with a friendly, approachable style 
-                that puts my clients at ease and ensures they leave feeling amazing.
-              </p>
+              <div className="space-y-4">
+                {aboutParagraphs.map((text) => (
+                  <p key={text} className={`${bodyClass} whitespace-pre-line`}>
+                    {text}
+                  </p>
+                ))}
+              </div>
               <div className="sm:flex pb-6">
                 <section className="flex-1 pt-6">
                   <h3 className="text-xl">Certifications</h3>
@@ -61,4 +58,4 @@ export default function AboutMePage() {
       </div>
     </div>
   );
-} 
+}
