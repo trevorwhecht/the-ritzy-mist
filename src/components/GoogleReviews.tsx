@@ -48,7 +48,7 @@ export default function GoogleReviews({ place }: { place: GooglePlace }) {
           >
             <div className="flex items-center gap-3">
               {r.authorPhotoUri && (
-                <Image src={r.authorPhotoUri} alt="" width={40} height={40} unoptimized className="w-10 h-10 rounded-full flex-shrink-0" />
+                <Image src={r.authorPhotoUri} alt="" width={40} height={40} unoptimized referrerPolicy="no-referrer" className="w-10 h-10 rounded-full flex-shrink-0" />
               )}
               <div className="min-w-0">
                 {r.authorUri ? (
