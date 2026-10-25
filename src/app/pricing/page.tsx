@@ -16,13 +16,15 @@ export default function PricingPage() {
 
   useEffect(() => {
     if (isEditable) {
-      // Check if already authenticated (stored in session)
-      const authStatus = sessionStorage.getItem('pricing-auth')
-      if (authStatus === 'true') {
-        setIsAuthenticated(true)
-      } else {
-        setShowPasswordModal(true)
-      }
+      // Deferred so setState isn't synchronous in the effect body
+      queueMicrotask(() => {
+        // Check if already authenticated (stored in session)
+        if (sessionStorage.getItem('pricing-auth') === 'true') {
+          setIsAuthenticated(true)
+        } else {
+          setShowPasswordModal(true)
+        }
+      })
     }
   }, [isEditable])
 

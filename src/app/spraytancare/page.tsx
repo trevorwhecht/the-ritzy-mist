@@ -27,11 +27,14 @@ export default function Care() {
 
   useEffect(() => {
     if (isEditable) {
-      if (sessionStorage.getItem('pricing-auth') === 'true') {
-        setIsAuthenticated(true)
-      } else {
-        setShowPasswordModal(true)
-      }
+      // Deferred so setState isn't synchronous in the effect body
+      queueMicrotask(() => {
+        if (sessionStorage.getItem('pricing-auth') === 'true') {
+          setIsAuthenticated(true)
+        } else {
+          setShowPasswordModal(true)
+        }
+      })
     }
   }, [isEditable])
 

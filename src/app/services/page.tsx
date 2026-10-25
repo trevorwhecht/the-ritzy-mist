@@ -8,7 +8,7 @@ declare global {
   interface Window {
     calendar?: {
       schedulingButton: {
-        load: (config: any) => void;
+        load: (config: unknown) => void;
       };
     };
   }

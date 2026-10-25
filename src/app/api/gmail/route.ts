@@ -43,7 +43,8 @@ export async function POST(req: Request) {
     try {
       await sgMail.send(msg);
       return NextResponse.json({ success: true });
-    } catch (error: any) {
+    } catch (err) {
+      const error = err as { message?: string; code?: unknown; response?: { body?: { errors?: { message?: string }[] }; headers?: unknown } }
       console.error('SendGrid Error Details:', {
         message: error.message,
         response: error.response?.body,
@@ -55,8 +56,7 @@ export async function POST(req: Request) {
       
       return NextResponse.json(
         { 
-          error: 'Failed to send email. Please try again later.',
-          details: error.response?.body?.errors?.[0]?.message || error.message 
+          error: 'Failed to send email. Please try again later.'
         },
         { status: 500 }
       );
