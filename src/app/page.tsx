@@ -3,9 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ServiceCard from '@/components/ServiceCard'
 import { SectionHeader } from '@/components/SectionHeader'
+import GoogleReviews from '@/components/GoogleReviews'
+import GooglePhotos from '@/components/GooglePhotos'
 import { aboutParagraphs, HOME_ABOUT_PARAGRAPHS } from '@/lib/aboutData'
+import { getGooglePlace } from '@/lib/googlePlaces'
 
 export default async function Home() {
+  const place = await getGooglePlace()
   const services = [
     {
       title: "Mobile Spray Tans",
@@ -28,16 +32,18 @@ export default async function Home() {
           >
             spray tanning
           </h2>
-          <a 
+          <Link
             className="btn-main px-6 py-3 text-lg font-semibold"
             href="/services/spraytans"
           >
             Book Now
-          </a>
+          </Link>
         </div>
       </div>
 
       <div className="main-content">
+        {place && place.reviews.length > 0 && <GoogleReviews place={place} />}
+
         <div className="w-full h-full relative flex flex-col sm:block">
           <div className="max-w-full-content mx-auto h-full">
             <div className="pl-5 py-2 pr-5 sm:w-2/4 sm:pr-24 text-center">
@@ -70,6 +76,8 @@ export default async function Home() {
             <ServiceCard />
           </div>
         </div>
+
+        {place && place.photos.length > 0 && <GooglePhotos photos={place.photos} />}
       </div>
     </>
   );
