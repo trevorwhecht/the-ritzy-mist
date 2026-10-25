@@ -80,7 +80,7 @@ export default function LoopCarousel({
       <div ref={railRef} className="rail flex">
         {/* Short lists are repeated to 4, then rendered twice so the loop never shows a gap at the seam */}
         {[...base, ...base].map((child, i) => (
-          <div key={i} className={`carousel-item flex-shrink-0 ${itemClassName ?? ''}`} aria-hidden={i >= count || undefined}>
+          <div key={i} className={`carousel-item flex-shrink-0 ${itemClassName ?? ''}`} aria-hidden={i >= count || undefined} inert={i >= count || undefined}>
             {child}
           </div>
         ))}
