@@ -18,12 +18,14 @@ export default function GooglePhotos({ photos }: { photos: GooglePhoto[] }) {
               className="object-cover"
             />
             {photo.attributions.length > 0 && (
-              <div className="absolute bottom-0 left-0 right-0 px-3 py-2 text-sm bg-[color-mix(in_srgb,var(--color-background)_60%,transparent)]">
+              // Tiny corner credit; pointer-events-auto opts back in past the carousel's pointer-events: none.
+              <div className="absolute bottom-0 right-0 max-w-full flex items-end pr-1.5 pb-1 text-[10px] leading-tight opacity-70 text-[var(--color-foreground)] [text-shadow:0_0_3px_var(--color-background),0_0_1px_var(--color-background)] pointer-events-auto">
                 {photo.attributions.map((a, i) => (
-                  <span key={i}>
-                    {i > 0 && ', '}
+                  <span key={i} className="flex items-end">
+                    {i > 0 && ', '}
                     {a.uri ? (
-                      <a href={a.uri} target="_blank" rel="noopener noreferrer">
+                      // min-h-11/min-w-11 give a 44px hit area without growing the visible label.
+                      <a href={a.uri} target="_blank" rel="noopener noreferrer" className="inline-flex items-end justify-end min-h-11 min-w-11">
                         {a.displayName}
                       </a>
                     ) : (

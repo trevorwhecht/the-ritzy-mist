@@ -40,7 +40,7 @@ export default function GoogleReviews({ place }: { place: GooglePlace }) {
         </div>
       </div>
       {/* 85vw on phones, 320px cards from md up; px-2 is the gap the loop measures */}
-      <LoopCarousel itemClassName="w-[85vw] md:w-80 px-2">
+      <LoopCarousel speed={0.5} itemClassName="w-[85vw] md:w-80 px-2">
         {place.reviews.map((r, i) => (
           <div
             key={i}
