@@ -46,3 +46,4 @@ sendgrid.env
 sendgrid.env
 sendgrid.env
 .env*.local
+!.env.example
