@@ -44,7 +44,7 @@ export default function GoogleReviews({ place }: { place: GooglePlace }) {
         {place.reviews.map((r, i) => (
           <div
             key={i}
-            className="h-full flex flex-col gap-3 p-5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] text-left"
+            className="flex flex-col gap-3 p-5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] text-left"
           >
             <div className="flex items-center gap-3">
               {r.authorPhotoUri && (
@@ -62,7 +62,7 @@ export default function GoogleReviews({ place }: { place: GooglePlace }) {
               </div>
             </div>
             <Stars rating={r.rating} size={16} />
-            <p className="text-base leading-7 whitespace-pre-line flex-1">{r.text}</p>
+            <p className="text-base leading-7 whitespace-pre-line">{r.text}</p>
             <span className="text-sm text-[var(--color-muted)]">Posted on Google</span>
           </div>
         ))}
