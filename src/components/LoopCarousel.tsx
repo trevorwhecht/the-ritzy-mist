@@ -17,10 +17,12 @@ export default function LoopCarousel({
   children,
   itemClassName,
   speed = 0.75,
+  reversed = false,
 }: {
   children: React.ReactNode[]
   itemClassName?: string
   speed?: number
+  reversed?: boolean
 }) {
   const railRef = useRef<HTMLDivElement>(null)
   // null on the server and during hydration, so the rail stays hidden until mounted.
@@ -44,7 +46,7 @@ export default function LoopCarousel({
         if (++tries < 20) frame = requestAnimationFrame(init)
         return
       }
-      tl = horizontalLoop(items, { repeat: -1, speed, paddingRight: 0, paused: false })
+      tl = horizontalLoop(items, { repeat: -1, speed, paddingRight: 0, paused: false, reversed })
     }
     const teardown = () => {
       cancelAnimationFrame(frame)
@@ -70,7 +72,7 @@ export default function LoopCarousel({
       clearTimeout(timer)
       teardown()
     }
-  }, [mounted, isDesktop, count, speed])
+  }, [mounted, isDesktop, count, speed, reversed])
 
   return (
     <div

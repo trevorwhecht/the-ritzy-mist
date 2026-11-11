@@ -6,7 +6,7 @@ export default function GooglePhotos({ photos }: { photos: GooglePhoto[] }) {
   return (
     <div className="w-full pt-8 pb-20">
       {/* Same cell size as onewitharts PrintPortfolio: 85vw square on phones, 300px tall from md up */}
-      <LoopCarousel itemClassName="relative w-[85vw] h-[85vw] md:w-[400px] md:h-[300px] overflow-hidden bg-[var(--color-surface)]">
+      <LoopCarousel speed={0.5} itemClassName="relative w-[85vw] h-[85vw] md:w-[400px] md:h-[300px] overflow-hidden bg-[var(--color-surface)]">
         {photos.map((photo) => (
           <div key={photo.name} className="w-full h-full">
             <Image
