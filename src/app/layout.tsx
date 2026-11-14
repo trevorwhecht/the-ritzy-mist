@@ -4,6 +4,7 @@ import Script from "next/script"
 import Footer from "@/components/Layout/Footer"
 import NavBar from "@/components/Layout/NavBar"
 import { Providers } from "./providers"
+import { localBusinessSchema } from "@/lib/localBusinessSchema"
 
 const OG_IMAGE =
   "https://7njnoxrfmp9jlkvi.public.blob.vercel-storage.com/Meta-data/RitzyMist-Landscape.jpg"
@@ -47,6 +48,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative bg-[var(--color-background)]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c") }}
+        />
         <Script id="facebook-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
