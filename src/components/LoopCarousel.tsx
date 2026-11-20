@@ -33,7 +33,8 @@ export default function LoopCarousel({
 
   // Rebuilt when the breakpoint flips or the window width changes, because item widths change with it.
   useEffect(() => {
-    if (!mounted || count === 0) return
+    // Reduced motion: leave the rail still instead of looping it.
+    if (!mounted || count === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let tl: gsap.core.Timeline | null = null
     let frame = 0
     let timer: ReturnType<typeof setTimeout> | undefined
