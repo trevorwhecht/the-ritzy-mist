@@ -66,12 +66,32 @@
   }
 
   .btn-main {
-    @apply inline-block text-white border-2 border-white bg-transparent hover:bg-white hover:text-black transition-colors duration-300;
+    @apply inline-block text-white border-2 border-white bg-transparent hover:bg-white hover:text-black transition-[color,background-color,transform,box-shadow] duration-200 ease-out motion-reduce:transition-none;
   }
 
   .btn-main:hover {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
     transform: scale(1.05);
+  }
+
+  /* Anticipation: a pressed state shows before the link navigates */
+  .btn-main:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Reduced motion: no looping glow or pulse, no entrance slide, no hover grow */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-glow,
+  .animate-slide-up,
+  .animate-pulse {
+    animation: none;
+  }
+
+  .btn-main:hover,
+  .btn-main:active {
+    transform: none;
   }
 }
 

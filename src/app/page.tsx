@@ -33,7 +33,7 @@ export default async function Home() {
             spray tanning
           </h2>
           <Link
-            className="btn-main px-6 py-3 text-lg font-semibold"
+            className="btn-main px-8 py-4 text-xl font-semibold"
             href="/services/spraytans"
           >
             Book Now
