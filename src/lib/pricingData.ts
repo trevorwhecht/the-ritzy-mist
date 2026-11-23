@@ -116,7 +116,7 @@ export const defaultPricingData: PricingData = {
         id: 'mobile-og-mist',
         title: 'OG Mist',
         description: 'Bringing everything to you! Our signature 8-hour developing formula gives a natural, hydrated bronze right from the comfort of your own space. We always finish the session off with a setting powder to make sure you\'re as comfortable as possible.',
-        price: '$75',
+        price: '$90',
         link: '/services/mobilespraytan/og-mist'
       },
       {

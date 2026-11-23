@@ -14,7 +14,7 @@ const services = [
   {
     title: "Mobile Spray Tan",
     description: "I bring my tent and spray you in the comfort of your own home!",
-    price: "Starting at $75",
+    price: "Starting at $90",
     imageUrl: "/IMG_0930.jpeg",
     href: "/services/mobilespraytan"
   },
