@@ -13,7 +13,7 @@ export default function MobileSprayTanBooking() {
   
   // Service mapping with prices
   const serviceMap: Record<string, { name: string; price: string }> = {
-    'og-mist': { name: 'OG MIST', price: '$75' },
+    'og-mist': { name: 'OG MIST', price: '$90' },
     'rapid-mist': { name: '✨ RAPID MIST', price: '$90' },
     'mobile-bridal-glow': { name: 'MOBILE BRIDAL GLOW', price: '$100' }
   };
