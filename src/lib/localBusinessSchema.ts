@@ -2,7 +2,7 @@ const BASE = "https://theritzymist.com"
 
 // Facts come from the site's own pages (Footer, NavBar, ServiceCard). No ratings or reviews on purpose.
 const OFFERS = [
-  ["Spray Tan", "Spray tan in the studio. Starting at $55"],
+  ["Spray Tan", "Spray tan in the studio. Starting at $65"],
   ["Mobile Spray Tan", "Spray tan in the comfort of your own home. Starting at $90"],
   ["Group Spray Tan", "For bridal parties, special events and groups. Starting at $300 (minimum 5 people)"],
 ]
